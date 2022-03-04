@@ -7,8 +7,9 @@
 	"license": "MIT",
 	"private": true,
 	"scripts": {
-		"start": "node src/app.js",
-		"start:local": "nodemon --exec babel-node src/app.js"
+		"start": "npm run build && node build/app.js",
+		"start:local": "nodemon --exec babel-node src/app.js",
+		"build": "babel src -d build"
 	},
 	"devDependencies": {
 		"@babel/core": "^7.17.5",
@@ -17,6 +18,7 @@
 		"nodemon": "^2.0.15"
 	},
 	"dependencies": {
+		"@babel/cli": "^7.17.6",
 		"cors": "^2.8.5",
 		"dotenv": "^16.0.0",
 		"express": "^4.17.3",
