@@ -21,6 +21,15 @@ export const authenticateUser = async (userName, password) => {
 
 export const getUsers = async () => {
 	return await UserModel.find()
+		.populate({
+			path: "applicationList",
+		})
+		.populate({
+			path: "jobList",
+		})
+		.populate({
+			path: "openToWorkList",
+		})
 		.then((users) => {
 			return users;
 		})

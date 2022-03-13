@@ -1,9 +1,21 @@
 import JobModel from "../models/Jobs.model";
+import UserModel from "../models/User.model";
 
-export const insertJob = async (data) => {
+export const insertJob = async (userId, data) => {
 	return await JobModel.create(data)
 		.then(async (createdJob) => {
-			return createdJob;
+			const user = await UserModel.findById(userId);
+			if (user) {
+				user.jobList.unshift(createdJob);
+				return user
+					.save()
+					.then(() => {
+						return createdJob;
+					})
+					.catch((error) => {
+						return error;
+					});
+			}
 		})
 		.catch((error) => {
 			throw new Error(error.message);
@@ -30,7 +42,7 @@ export const updateJob = async (jobId, updateData) => {
 				if (jobDetails.position) {
 					jobDetails.position = updateData.position;
 				}
-                if (jobDetails.description) {
+				if (jobDetails.description) {
 					jobDetails.description = updateData.description;
 				}
 				return await jobDetails.save();
@@ -43,9 +55,23 @@ export const updateJob = async (jobId, updateData) => {
 		});
 };
 
-export const deleteJobPermenently = async (jobId) => {
+export const deleteJobPermenently = async (userId, jobId) => {
 	return await JobModel.findByIdAndDelete(jobId)
-		.then((job) => {
+		.then(async (job) => {
+			const user = await UserModel.findById(userId);
+			if (user) {
+
+				await user.jobList.splice( user.jobList.findIndex(a => a._id.toString() === job._id.toString()) , 1);
+
+				return await user
+					.save()
+					.then(() => {
+						return job;
+					})
+					.catch((error) => {
+						return error;
+					});
+			}
 			return job;
 		})
 		.catch((error) => {

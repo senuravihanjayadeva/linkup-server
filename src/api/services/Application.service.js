@@ -1,9 +1,21 @@
 import ApplicationModel from "../models/Applications.model";
+import UserModel from "../models/User.model";
 
-export const insertApplication = async (data) => {
+export const insertApplication = async (userId,data) => {
 	return await ApplicationModel.create(data)
 		.then(async (createdApplication) => {
-			return createdApplication;
+			const user = await UserModel.findById(userId);
+			if (user) {
+				user.applicationList.unshift(createdApplication);
+				return user
+					.save()
+					.then(() => {
+						return createdApplication;
+					})
+					.catch((error) => {
+						return error;
+					});
+			}
 		})
 		.catch((error) => {
 			throw new Error(error.message);

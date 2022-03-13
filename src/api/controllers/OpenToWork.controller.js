@@ -1,7 +1,7 @@
 import OpenToWorkService from "../services";
 
 export const createOpenToWork = async (request, response, next) => {
-	await OpenToWorkService.insertOpenToWork(request.body)
+	await OpenToWorkService.insertOpenToWork(request.params.userId, request.body)
 		.then((data) => {
 			request.handleResponse.successRespond(response)(data);
 			next();

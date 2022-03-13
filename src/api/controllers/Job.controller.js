@@ -1,7 +1,7 @@
 import JobService from "../services";
 
 export const createJob = async (request, response, next) => {
-	await JobService.insertJob(request.body)
+	await JobService.insertJob(request.params.userId, request.body)
 		.then((data) => {
 			request.handleResponse.successRespond(response)(data);
 			next();
@@ -37,8 +37,8 @@ export const updateJob = async (request, response, next) => {
 };
 
 export const deleteJobPermenently = async (request, response, next) => {
-	if (request.params.id) {
-		await JobService.deleteJobPermenently(request.params.id)
+	if (request.params.userId && request.params.jobId) {
+		await JobService.deleteJobPermenently(request.params.userId,request.params.jobId)
 			.then((job) => {
 				request.handleResponse.successRespond(response)(job);
 				next();

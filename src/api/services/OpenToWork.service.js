@@ -1,9 +1,21 @@
 import OpenToWork from "../models/OpenToWork.model";
+import UserModel from "../models/User.model";
 
-export const insertOpenToWork = async (data) => {
+export const insertOpenToWork = async (userId, data) => {
 	return await OpenToWork.create(data)
 		.then(async (createdOpenToWork) => {
-			return createdOpenToWork;
+			const user = await UserModel.findById(userId);
+			if (user) {
+				user.openToWorkList.unshift(createdOpenToWork);
+				return user
+					.save()
+					.then(() => {
+						return createdOpenToWork;
+					})
+					.catch((error) => {
+						return error;
+					});
+			}
 		})
 		.catch((error) => {
 			throw new Error(error.message);

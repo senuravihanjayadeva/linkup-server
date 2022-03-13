@@ -1,7 +1,7 @@
 import ApplicationModel from "../services";
 
 export const createdApplication = async (request, response, next) => {
-	await ApplicationModel.insertApplication(request.body)
+	await ApplicationModel.insertApplication(request.params.userId, request.body)
 		.then((data) => {
 			request.handleResponse.successRespond(response)(data);
 			next();
