@@ -2,6 +2,8 @@ import "dotenv/config";
 import express from "express";
 import cors from "cors";
 import logger from "./utils/logger";
+import routes from "./api/routes";
+import responseHandler from "./utils/response.handler";
 import connect from "./utils/db.connection";
 
 const app = express();
@@ -15,9 +17,15 @@ app.get("/", (_req, res, next) => {
 	next();
 });
 
-app.use("/api", require("./api/routes/index"))
+// Inject Response Handler
+app.use((req, res, next) => {
+	req.handleResponse = responseHandler;
+	next();
+});
+
 
 app.listen(PORT, () => {
 	logger.info(`🚀 Server is up and running on PORT ${PORT}`);
 	connect();
+	routes(app);
 });
