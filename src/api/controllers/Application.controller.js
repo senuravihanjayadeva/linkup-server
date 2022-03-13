@@ -1,15 +1,12 @@
 import ApplicationModel from "../services";
-import logger from "../../util/logger";
 
 export const createdApplication = async (request, response, next) => {
 	await ApplicationModel.insertApplication(request.body)
 		.then((data) => {
-			logger.info(`New Application with ID ${data._id} created`);
 			request.handleResponse.successRespond(response)(data);
 			next();
 		})
 		.catch((error) => {
-			logger.error(error.message);
 			request.handleResponse.errorRespond(response)(error.message);
 			next();
 		});

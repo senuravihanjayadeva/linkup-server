@@ -1,15 +1,12 @@
 import JobService from "../services";
-import logger from "../../util/logger";
 
 export const createJob = async (request, response, next) => {
 	await JobService.insertJob(request.body)
 		.then((data) => {
-			logger.info(`New job with ID ${data._id} created`);
 			request.handleResponse.successRespond(response)(data);
 			next();
 		})
 		.catch((error) => {
-			logger.error(error.message);
 			request.handleResponse.errorRespond(response)(error.message);
 			next();
 		});

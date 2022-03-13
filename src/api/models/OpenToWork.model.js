@@ -9,4 +9,6 @@ const openToWorkSchema = new Schema(
 	{ timestamps: true }
 );
 
-export default OpenToWork = mongoose.model("OpenToWork", openToWorkSchema);
+const OpenToWork = mongoose.model("OpenToWork", openToWorkSchema);
+
+export default OpenToWork;

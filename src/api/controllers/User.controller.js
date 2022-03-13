@@ -1,8 +1,6 @@
-import { Request, Response, NextFunction } from "express";
-import JobService from "../services";
-import logger from "../../util/logger";
+import UserService from "../services";
 
-export const createJob = async (request, response, next) => {
+export const createUser = async (request, response, next) => {
 	const userInfo = {
 		userName: request.body.userName,
 		password: request.body.password,
@@ -11,23 +9,15 @@ export const createJob = async (request, response, next) => {
 
 	await UserService.insertUser(userInfo)
 		.then((data) => {
-			logger.info(`New user with ID ${data._id} created`);
 			request.handleResponse.successRespond(response)(data);
 			next();
 		})
 		.catch((error) => {
-			logger.error(error.message);
 			request.handleResponse.errorRespond(response)(error.message);
 			next();
 		});
 };
 
-/**
- * @param {Request} request - Request from the frontend
- * @param {Response} response - Response that need to send to the client
- * @param {NextFunction} next - Next function
- * @returns {IUser} Authenticated user document
- */
 export const login = async (request, response, next) => {
 	const { userName, password } = request.body;
 
@@ -58,12 +48,6 @@ export const login = async (request, response, next) => {
 	}
 };
 
-/**
- * @param {Request} request - Request from the frontend
- * @param {Response} response - Response that need to send to the client
- * @param {NextFunction} next - Next function
- * @returns {IUser} Authenticated user document
- */
 export const getAuthUser = async (request, response, next) => {
 	const userInfo = {
 		_id: request.user._id,
@@ -75,15 +59,6 @@ export const getAuthUser = async (request, response, next) => {
 	next();
 };
 
-/**
- * @todo implement a @function getAllUsers that calls
- * @function getUsers in the UserService
- *
- * @param {Request} request - Request from the frontend
- * @param {Response} response - Response that need to send to the client
- * @param {NextFunction} next - Next function
- * @returns {IUser[]} All user documents in the system
- */
 export const getAllUsers = async (request, response, next) => {
 	await UserService.getUsers()
 		.then((users) => {
@@ -96,15 +71,6 @@ export const getAllUsers = async (request, response, next) => {
 		});
 };
 
-/**
- * @todo implement a @function updateUser that calls
- * @function updateUser in the UserService
- *
- * @param {Request} request - Request from the frontend
- * @param {Response} response - Response that need to send to the client
- * @param {NextFunction} next - Next function
- * @returns {IUser} Updated user document
- */
 export const updateUser = async (request, response, next) => {
 	await UserService.updateUser(request.user._id, request.body)
 		.then((user) => {

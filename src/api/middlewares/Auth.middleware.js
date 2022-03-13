@@ -1,5 +1,4 @@
 import jwt from "jsonwebtoken";
-import logger from "../../util/logger";
 import UserModel from "../models/User.model";
 
 export const authenticate = async (request, response, next) => {
@@ -25,13 +24,11 @@ export const authenticate = async (request, response, next) => {
 			request.authToken = authToken;
 			request.user = user;
 
-			logger.info(`Authentication Token for ID ${user._id} is Accepted`);
 			next();
 		} else {
 			throw new Error("Token Secret is not found");
 		}
 	} catch (error) {
-		logger.warn(error.message);
 		return request.handleResponse.unauthorizedRespond(response)(error.message);
 	}
 };

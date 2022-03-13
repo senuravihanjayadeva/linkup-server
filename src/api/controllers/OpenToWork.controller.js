@@ -1,15 +1,12 @@
 import OpenToWorkService from "../services";
-import logger from "../../util/logger";
 
 export const createOpenToWork = async (request, response, next) => {
 	await OpenToWorkService.insertOpenToWork(request.body)
 		.then((data) => {
-			logger.info(`New OpenToWork with ID ${data._id} created`);
 			request.handleResponse.successRespond(response)(data);
 			next();
 		})
 		.catch((error) => {
-			logger.error(error.message);
 			request.handleResponse.errorRespond(response)(error.message);
 			next();
 		});

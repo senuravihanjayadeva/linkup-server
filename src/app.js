@@ -15,6 +15,8 @@ app.get("/", (_req, res, next) => {
 	next();
 });
 
+app.use("/api", require("./api/routes/index"))
+
 app.listen(PORT, () => {
 	logger.info(`🚀 Server is up and running on PORT ${PORT}`);
 	connect();
