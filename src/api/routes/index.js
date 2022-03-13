@@ -20,7 +20,7 @@ export default function (app) {
 	app.post("/applications/user/:userId", controller.createdApplication);
 	app.get("/applications/all", controller.getAllApplications);
 	app.put("/applications/", controller.updateApplication);
-	app.delete("/applications/remove/", controller.deleteApplicationPermenently);
+	app.delete("/applications/remove/:userId/:applicationId", controller.deleteApplicationPermenently);
 
 	// OpenToWork endpoints
 	app.post("/opentowork/user/:userId", controller.createOpenToWork);

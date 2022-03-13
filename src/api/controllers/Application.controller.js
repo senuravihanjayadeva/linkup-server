@@ -37,8 +37,8 @@ export const updateApplication = async (request, response, next) => {
 };
 
 export const deleteApplicationPermenently = async (request, response, next) => {
-	if (request.params.id) {
-		await ApplicationModel.deleteApplicationPermenently(request.params.id)
+	if (request.params.userId && request.params.applicationId) {
+		await ApplicationModel.deleteApplicationPermenently(request.params.userId, request.params.applicationId)
 			.then((application) => {
 				request.handleResponse.successRespond(response)(application);
 				next();

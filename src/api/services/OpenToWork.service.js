@@ -57,8 +57,23 @@ export const updateOpenToWork = async (openToWorkId, updateData) => {
 
 export const deleteOpenToWorkPermenently = async (openToWorkId) => {
 	return await OpenToWork.findByIdAndDelete(openToWorkId)
-		.then((openToWork) => {
-			return openToWork;
+		.then(async (openToWork) => {
+			const user = await UserModel.findById(userId);
+			if (user) {
+				await user.openToWorkList.splice(
+					user.openToWorkList.findIndex((a) => a._id.toString() === openToWork._id.toString()),
+					1
+				);
+
+				return await user
+					.save()
+					.then(() => {
+						return openToWork;
+					})
+					.catch((error) => {
+						return error;
+					});
+			}
 		})
 		.catch((error) => {
 			throw new Error(error.message);

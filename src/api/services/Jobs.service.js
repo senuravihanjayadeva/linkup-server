@@ -60,8 +60,10 @@ export const deleteJobPermenently = async (userId, jobId) => {
 		.then(async (job) => {
 			const user = await UserModel.findById(userId);
 			if (user) {
-
-				await user.jobList.splice( user.jobList.findIndex(a => a._id.toString() === job._id.toString()) , 1);
+				await user.jobList.splice(
+					user.jobList.findIndex((a) => a._id.toString() === job._id.toString()),
+					1
+				);
 
 				return await user
 					.save()
@@ -72,7 +74,6 @@ export const deleteJobPermenently = async (userId, jobId) => {
 						return error;
 					});
 			}
-			return job;
 		})
 		.catch((error) => {
 			throw new Error(error.message);

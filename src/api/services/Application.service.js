@@ -1,7 +1,7 @@
 import ApplicationModel from "../models/Applications.model";
 import UserModel from "../models/User.model";
 
-export const insertApplication = async (userId,data) => {
+export const insertApplication = async (userId, data) => {
 	return await ApplicationModel.create(data)
 		.then(async (createdApplication) => {
 			const user = await UserModel.findById(userId);
@@ -73,10 +73,25 @@ export const updateApplication = async (applicationId, updateData) => {
 		});
 };
 
-export const deleteApplicationPermenently = async (applicationId) => {
+export const deleteApplicationPermenently = async (userId,applicationId) => {
 	return await ApplicationModel.findByIdAndDelete(applicationId)
-		.then((application) => {
-			return application;
+		.then(async (application) => {
+			const user = await UserModel.findById(userId);
+			if (user) {
+				await user.applicationList.splice(
+					user.applicationList.findIndex((a) => a._id.toString() === application._id.toString()),
+					1
+				);
+
+				return await user
+					.save()
+					.then(() => {
+						return application;
+					})
+					.catch((error) => {
+						return error;
+					});
+			}
 		})
 		.catch((error) => {
 			throw new Error(error.message);
