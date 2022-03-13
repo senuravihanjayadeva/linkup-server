@@ -14,8 +14,20 @@ export const createOpenToWork = async (request, response, next) => {
 
 export const getAllOpenToWorks = async (request, response, next) => {
 	await OpenToWorkService.getAllOpenToWorks()
-		.then((jobs) => {
-			request.handleResponse.successRespond(response)(jobs);
+		.then((openToWorks) => {
+			request.handleResponse.successRespond(response)(openToWorks);
+			next();
+		})
+		.catch((error) => {
+			request.handleResponse.errorRespond(response)(error.message);
+			next();
+		});
+};
+
+export const getOpenToWorkById = async (request, response, next) => {
+	await OpenToWorkService.getOpenToWorkById(request.params.openToWorkId)
+		.then((openToWork) => {
+			request.handleResponse.successRespond(response)(openToWork);
 			next();
 		})
 		.catch((error) => {

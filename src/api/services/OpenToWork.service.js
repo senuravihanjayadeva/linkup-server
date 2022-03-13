@@ -32,6 +32,16 @@ export const getAllOpenToWorks = async () => {
 		});
 };
 
+export const getOpenToWorkById = async (openToWorkId) => {
+	return await OpenToWork.findById(openToWorkId)
+		.then((openToWork) => {
+			return openToWork;
+		})
+		.catch((error) => {
+			throw new Error(error.message);
+		});
+};
+
 export const updateOpenToWork = async (openToWorkId, updateData) => {
 	return await OpenToWork.findById(openToWorkId)
 		.then(async (openToWorkDetails) => {

@@ -8,6 +8,7 @@ import {
 
 import {
 	insertJob,
+	getJobById,
 	getAllJobs,
 	updateJob,
 	deleteJobPermenently,
@@ -15,6 +16,7 @@ import {
 
 import {
 	insertApplication,
+	getApplicationById,
 	getAllApplications,
 	updateApplication,
 	deleteApplicationPermenently,
@@ -22,6 +24,7 @@ import {
 
 import {
 	insertOpenToWork,
+	getOpenToWorkById,
 	getAllOpenToWorks,
 	updateOpenToWork,
 	deleteOpenToWorkPermenently,
@@ -37,15 +40,18 @@ export default {
 	//Job Service
 	insertJob,
 	getAllJobs,
+	getJobById,
 	updateJob,
 	deleteJobPermenently,
 	//OpenToWork Service
 	insertOpenToWork,
+	getOpenToWorkById,
 	getAllOpenToWorks,
 	updateOpenToWork,
 	deleteOpenToWorkPermenently,
 	//Application Service
 	insertApplication,
+	getApplicationById,
 	getAllApplications,
 	updateApplication,
 	deleteApplicationPermenently,

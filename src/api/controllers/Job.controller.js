@@ -24,6 +24,18 @@ export const getAllJobs = async (request, response, next) => {
 		});
 };
 
+export const getJobById = async (request, response, next) => {
+	await JobService.getJobById(request.params.jobId)
+		.then((job) => {
+			request.handleResponse.successRespond(response)(job);
+			next();
+		})
+		.catch((error) => {
+			request.handleResponse.errorRespond(response)(error.message);
+			next();
+		});
+};
+
 export const updateJob = async (request, response, next) => {
 	await JobService.updateJob(request.params.jobId, request.body)
 		.then((job) => {

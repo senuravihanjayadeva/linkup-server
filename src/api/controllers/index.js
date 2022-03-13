@@ -9,6 +9,7 @@ import {
 
 import {
 	createdApplication,
+	getApplicationById,
 	getAllApplications,
 	updateApplication,
 	deleteApplicationPermenently,
@@ -16,6 +17,7 @@ import {
 
 import {
 	createJob,
+	getJobById,
 	getAllJobs,
 	updateJob,
 	deleteJobPermenently,
@@ -23,6 +25,7 @@ import {
 
 import {
 	createOpenToWork,
+	getOpenToWorkById,
 	getAllOpenToWorks,
 	updateOpenToWork,
 	deleteOpenToWorkPermenently,
@@ -38,16 +41,19 @@ export default {
 	deleteUserPermenently,
 	//Application Controllers
 	createdApplication,
+	getApplicationById,
 	getAllApplications,
 	updateApplication,
 	deleteApplicationPermenently,
 	//Job Controllers
 	createJob,
+	getJobById,
 	getAllJobs,
 	updateJob,
 	deleteJobPermenently,
 	//OpenToWork Controllers
 	createOpenToWork,
+	getOpenToWorkById,
 	getAllOpenToWorks,
 	updateOpenToWork,
 	deleteOpenToWorkPermenently,

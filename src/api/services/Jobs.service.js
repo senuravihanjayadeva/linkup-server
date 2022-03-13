@@ -32,6 +32,16 @@ export const getAllJobs = async () => {
 		});
 };
 
+export const getJobById = async (jobId) => {
+	return await JobModel.findById(jobId)
+		.then((job) => {
+			return job;
+		})
+		.catch((error) => {
+			throw new Error(error.message);
+		});
+};
+
 export const updateJob = async (jobId, updateData) => {
 	return await JobModel.findById(jobId)
 		.then(async (jobDetails) => {

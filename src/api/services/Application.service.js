@@ -32,6 +32,16 @@ export const getAllApplications = async () => {
 		});
 };
 
+export const getApplicationById = async (applicationId) => {
+	return await ApplicationModel.findById(applicationId)
+		.then((application) => {
+			return application;
+		})
+		.catch((error) => {
+			throw new Error(error.message);
+		});
+};
+
 export const updateApplication = async (applicationId, updateData) => {
 	return await ApplicationModel.findById(applicationId)
 		.then(async (applicationDetails) => {
