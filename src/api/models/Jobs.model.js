@@ -5,6 +5,10 @@ const jobsSchema = new Schema(
 		company: String,
 		position: String,
 		description: String,
+		user: {
+			type: mongoose.Schema.Types.ObjectId,
+			ref: "User",
+		},
 	},
 	{ timestamps: true }
 );

@@ -11,6 +11,10 @@ const applicationsSchema = new Schema(
 		linkedIn: String,
 		github: String,
 		status: String,
+		user: {
+			type: mongoose.Schema.Types.ObjectId,
+			ref: "User",
+		},
 	},
 	{ timestamps: true }
 );
