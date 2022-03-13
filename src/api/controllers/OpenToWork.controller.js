@@ -25,7 +25,7 @@ export const getAllOpenToWorks = async (request, response, next) => {
 };
 
 export const updateOpenToWork = async (request, response, next) => {
-	await OpenToWorkService.updateOpenToWork(request.params.id, request.body)
+	await OpenToWorkService.updateOpenToWork(request.params.openToWorkId, request.body)
 		.then((job) => {
 			request.handleResponse.successRespond(response)(job);
 			next();

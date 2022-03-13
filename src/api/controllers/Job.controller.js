@@ -25,7 +25,7 @@ export const getAllJobs = async (request, response, next) => {
 };
 
 export const updateJob = async (request, response, next) => {
-	await JobService.updateUser(request.params.id, request.body)
+	await JobService.updateJob(request.params.jobId, request.body)
 		.then((job) => {
 			request.handleResponse.successRespond(response)(job);
 			next();

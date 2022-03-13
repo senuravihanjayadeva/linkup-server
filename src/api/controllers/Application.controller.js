@@ -25,7 +25,7 @@ export const getAllApplications = async (request, response, next) => {
 };
 
 export const updateApplication = async (request, response, next) => {
-	await ApplicationModel.updateApplication(request.params.id, request.body)
+	await ApplicationModel.updateApplication(request.params.applicationId, request.body)
 		.then((application) => {
 			request.handleResponse.successRespond(response)(application);
 			next();

@@ -36,8 +36,6 @@ export const login = async (request, response, next) => {
 					errorTime: new Date(),
 					message: error.message,
 				};
-
-				logger.error(JSON.stringify(errorResponseData));
 				request.handleResponse.errorRespond(response)(errorResponseData);
 				next();
 			});
