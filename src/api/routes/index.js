@@ -17,10 +17,10 @@ export default function (app) {
 	app.delete("/jobs/remove/", controller.deleteJobPermenently);
 
 	// Applications endpoints
-	app.post("/applications/", controller.createJob);
-	app.get("/applications/all", controller.getAllJobs);
-	app.put("/applications/", controller.updateJob);
-	app.delete("/applications/remove/", controller.deleteJobPermenently);
+	app.post("/applications/", controller.createdApplication);
+	app.get("/applications/all", controller.getAllApplications);
+	app.put("/applications/", controller.updateApplication);
+	app.delete("/applications/remove/", controller.deleteApplicationPermenently);
 
 	// OpenToWork endpoints
 	app.post("/opentowork/", controller.createOpenToWork);
