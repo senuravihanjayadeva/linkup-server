@@ -117,7 +117,7 @@ export const updateUser = async (request, response, next) => {
 		});
 };
 
-export const removeUserPermenently = async (request, response, next) => {
+export const deleteUserPermenently = async (request, response, next) => {
 	if (request.body.userId) {
 		await UserService.deleteUserPermenently(request.body.userId)
 			.then((user) => {

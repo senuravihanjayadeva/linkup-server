@@ -14,6 +14,13 @@ import {
 } from "./Jobs.service";
 
 import {
+	insertApplication,
+	getAllApplications,
+	updateApplication,
+	deleteApplicationPermenently,
+} from "./Application.service";
+
+import {
 	insertOpenToWork,
 	getAllOpenToWorks,
 	updateOpenToWork,
@@ -37,4 +44,9 @@ export default {
 	getAllOpenToWorks,
 	updateOpenToWork,
 	deleteOpenToWorkPermenently,
+	//Application Service
+	insertApplication,
+	getAllApplications,
+	updateApplication,
+	deleteApplicationPermenently,
 };

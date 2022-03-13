@@ -39,9 +39,9 @@ export const updateJob = async (request, response, next) => {
 		});
 };
 
-export const removeJobPermenently = async (request, response, next) => {
+export const deleteJobPermenently = async (request, response, next) => {
 	if (request.params.id) {
-		await JobService.deleteUserPermenently(request.params.id)
+		await JobService.deleteJobPermenently(request.params.id)
 			.then((job) => {
 				request.handleResponse.successRespond(response)(job);
 				next();

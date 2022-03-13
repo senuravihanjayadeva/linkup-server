@@ -2,9 +2,9 @@ import OpenToWorkService from "../services";
 import logger from "../../util/logger";
 
 export const createOpenToWork = async (request, response, next) => {
-	await OpenToWorkService.insertJob(request.body)
+	await OpenToWorkService.insertOpenToWork(request.body)
 		.then((data) => {
-			logger.info(`New job with ID ${data._id} created`);
+			logger.info(`New OpenToWork with ID ${data._id} created`);
 			request.handleResponse.successRespond(response)(data);
 			next();
 		})
@@ -16,7 +16,7 @@ export const createOpenToWork = async (request, response, next) => {
 };
 
 export const getAllOpenToWorks = async (request, response, next) => {
-	await OpenToWorkService.getAllJobs()
+	await OpenToWorkService.getAllOpenToWorks()
 		.then((jobs) => {
 			request.handleResponse.successRespond(response)(jobs);
 			next();
@@ -28,7 +28,7 @@ export const getAllOpenToWorks = async (request, response, next) => {
 };
 
 export const updateOpenToWork = async (request, response, next) => {
-	await OpenToWorkService.updateUser(request.params.id, request.body)
+	await OpenToWorkService.updateOpenToWork(request.params.id, request.body)
 		.then((job) => {
 			request.handleResponse.successRespond(response)(job);
 			next();
@@ -39,11 +39,11 @@ export const updateOpenToWork = async (request, response, next) => {
 		});
 };
 
-export const removeOpenToWorkPermenently = async (request, response, next) => {
+export const deleteOpenToWorkPermenently = async (request, response, next) => {
 	if (request.params.id) {
-		await OpenToWorkService.deleteUserPermenently(request.params.id)
-			.then((job) => {
-				request.handleResponse.successRespond(response)(job);
+		await OpenToWorkService.deleteOpenToWorkPermenently(request.params.id)
+			.then((openToWork) => {
+				request.handleResponse.successRespond(response)(openToWork);
 				next();
 			})
 			.catch((error) => {
@@ -51,7 +51,7 @@ export const removeOpenToWorkPermenently = async (request, response, next) => {
 				next();
 			});
 	} else {
-		request.handleResponse.errorRespond(response)(JSON.parse("Job id is not Passed"));
+		request.handleResponse.errorRespond(response)(JSON.parse("openToWork id is not Passed"));
 		next();
 	}
 };
