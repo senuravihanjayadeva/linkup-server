@@ -55,7 +55,7 @@ export const updateOpenToWork = async (openToWorkId, updateData) => {
 		});
 };
 
-export const deleteOpenToWorkPermenently = async (openToWorkId) => {
+export const deleteOpenToWorkPermenently = async (userId,openToWorkId) => {
 	return await OpenToWork.findByIdAndDelete(openToWorkId)
 		.then(async (openToWork) => {
 			const user = await UserModel.findById(userId);

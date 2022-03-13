@@ -26,5 +26,5 @@ export default function (app) {
 	app.post("/opentowork/user/:userId", controller.createOpenToWork);
 	app.get("/opentowork/all", controller.getAllOpenToWorks);
 	app.put("/opentowork/", controller.updateOpenToWork);
-	app.delete("/opentowork/remove/", controller.deleteOpenToWorkPermenently);
+	app.delete("/opentowork/remove/:userId/:openToWorkId", controller.deleteOpenToWorkPermenently);
 }

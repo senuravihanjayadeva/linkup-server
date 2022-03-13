@@ -37,8 +37,8 @@ export const updateOpenToWork = async (request, response, next) => {
 };
 
 export const deleteOpenToWorkPermenently = async (request, response, next) => {
-	if (request.params.id) {
-		await OpenToWorkService.deleteOpenToWorkPermenently(request.params.id)
+	if (request.params.userId && request.params.openToWorkId) {
+		await OpenToWorkService.deleteOpenToWorkPermenently(request.params.userId, request.params.openToWorkId)
 			.then((openToWork) => {
 				request.handleResponse.successRespond(response)(openToWork);
 				next();
