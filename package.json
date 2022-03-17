@@ -5,9 +5,8 @@
 	"main": "app.js",
 	"author": "2022-170",
 	"license": "MIT",
-	"private": true,
 	"scripts": {
-		"start": "node app.js",
+		"start": "node build/app.js",
 		"start:local": "nodemon --exec babel-node src/app.js",
 		"build": "babel src -d build"
 	},
