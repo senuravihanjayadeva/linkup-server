@@ -7,7 +7,7 @@
 	"license": "MIT",
 	"private": true,
 	"scripts": {
-		"start": "npm run build && node build/app.js",
+		"start": "node build/app.js",
 		"start:local": "nodemon --exec babel-node src/app.js",
 		"build": "babel src -d build"
 	},
