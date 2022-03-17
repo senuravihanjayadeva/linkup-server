@@ -1,12 +1,11 @@
 import mongoose from "mongoose";
 import logger from "./logger";
-import Configs from "../configs";
 
 let database;
 
 const connect = async () => {
 	try {
-		const databaseConnectionString = Configs.DB_CONNECTION_STRING;
+		const databaseConnectionString = process.env.DB_CONNECTION_STRING;
 
 		if (database) return;
 
