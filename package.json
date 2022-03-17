@@ -6,7 +6,7 @@
 	"author": "2022-170",
 	"license": "MIT",
 	"scripts": {
-		"start": "node build",
+		"start": "node build/app.js",
 		"start:local": "nodemon --exec babel-node src/app.js",
 		"build": "babel src -d build"
 	},
